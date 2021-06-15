@@ -13,8 +13,8 @@ document link here
 
 Design Link
 ```sh
-lofi link here
-hifi link here
+lo-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1
+hi-fi link: here
 ```
 
 ## Folder Structure
@@ -51,10 +51,10 @@ hifi link here
 ## Contribution guide
 ```sh
    - issues will be created based on features/components
-   - issues will be assinged to teammates
+   - issues will be assigned to teammates
    - devs should fork and clone the repo 
-   - devs should create a branch out of branch development based on feature  / issues assigned to them e.g ft-nav_bar
-   - devs should push to branch development and create a pull request when done
+   - devs should create a branch out of branch develop based on feature/issues assigned to them e.g ft-nav_bar
+   - devs should push to branch develop and create a pull request when done
    - code should be hosted on gh pages or netlify 
    - hosted link should be added as a comment on issues
 ```
