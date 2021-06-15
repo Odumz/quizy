@@ -1,11 +1,21 @@
 # Stocka-be-pjt-102
 Backend for Stocka project
 
-## Getting Started
+## Project Description
 This is an an inventory digital solution that will take account of trader's sales and stocks, calculates their profits or losses over a specific period of time and offer suggestions to build profits.
 Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
 at point of purchase, and daily profit and loss results.
 
+Documentation Link
+```sh
+document link here
+```
+
+Design Link
+```sh
+lofi link here
+hifi link here
+```
 
 ## Folder Structure
 1.  src  // folder containing all relevant source code
@@ -38,18 +48,16 @@ at point of purchase, and daily profit and loss results.
    npm run start
    ```
 
-## Collaboration tips
-On Github, there will be an initial two branches
-   -- main 
-   -- ft-dev
-
-ft-dev branch is where the team lead will push to for review before it will be merged with main. So basically, everyone will pull from ft-dev not main
-
-After you pull from ft-dev, create your own branch -- ft-<gitusername>-dev and do all of your work here. 
-
-When you are done, create a pull request on the ft-dev branch, please after you create a pull request, do not do any other thing 
-
-Once your pull request has been approved, you can pull from the ft-dev branch to your branch (ft-<githubusername>-dev) and start on the new feature
+## Contribution guide
+```sh
+   - issues will be created based on features/components
+   - issues will be assinged to teammates
+   - devs should fork and clone the repo 
+   - devs should create a branch out of branch development based on feature  / issues assigned to them e.g ft-nav_bar
+   - devs should push to branch development and create a pull request when done
+   - code should be hosted on gh pages or netlify 
+   - hosted link should be added as a comment on issues
+```
 
 The postman collection can be imported at 
 
