@@ -1,2 +1,156 @@
 # Stocka-be-pjt-102
 Backend for Stocka project
+
+## Getting Started
+This is an an inventory digital solution that will take account of trader's sales and stocks, calculates their profits or losses over a specific period of time and offer suggestions to build profits.
+Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
+at point of purchase, and daily profit and loss results.
+
+
+## Folder Structure
+1.  src
+     -- controllers
+     -- db
+     -- routes
+     -- models
+     -- services
+     -- utils
+    test
+    views*
+    .env
+   
+## Installation and Usage
+
+1. Clone the repo
+   ```sh
+   git clone
+   ```
+   OR
+   ```sh
+   git pull origin main
+   ```
+2. Install NPM packages
+   ```sh
+   npm install || npm i
+   ```
+3. Once in the root folder, run
+   ```sh
+   npm run start
+   ```
+
+## Collaboration tips
+On Github, there will be an initial two branches
+   -- main 
+   -- ft-dev
+
+ft-dev branch is where the team lead will push to for review before it will be merged with main. So basically, everyone will pull from ft-dev not main
+
+After you pull from ft-dev, create your own branch -- ft-<gitusername>-dev and do all of your work here. 
+
+When you are done, create a pull request on the ft-dev branch, please after you create a pull request, do not do any other thing 
+
+Once your pull request has been approved, you can pull from the ft-dev branch to your branch (ft-<githubusername>-dev) and start on the new feature
+
+The postman collection can be imported at 
+
+## Routes and Usage
+
+The postman collection can be imported at 
+
+### Environments
+<p>Local URL: http://localhost:5002</p>
+<p></p>Production URL: </p>
+
+### Test Routes
+```
+ {URL}:
+  get:
+    summary: Test route to check connection
+    responses:
+      status: '200'
+      message: 'Welcome to my crud application with mongodb.'
+```
+
+```
+ {URL}/api/v1:
+  get:
+    summary: Test route to check connection
+    responses:
+      status: '200'
+      message: 'Welcome to the my crud application with mongo db. This is the  service'
+```
+
+### Data Routes
+Get all route
+
+```
+ {URL}/api/v1/stock:
+  get:
+    summary: Route for getting all records
+    responses:
+      status: '200'
+      message: {
+         message: {String: 'All stock successfully fetched'}
+      }
+```
+  
+Get one route
+```
+ {URL}/api/v1/stock/:id:
+  get:
+    summary: Route for getting a record by id
+    responses:
+      status: '200'
+      message: {
+         message: {String: 'Image successfully fetched'}
+      }
+```
+
+Create route
+```
+ {URL}/api/v1/add:
+  post:
+    summary: Route for creating new records
+    responses:
+      status: '200'
+      message: {
+         message: {String: 'Image successfully added'}
+      }
+      body: {
+         option: raw,
+         payload: {
+            
+         }
+      }
+```
+
+Edit route
+```
+ {URL}/api/v1/stock/edit/:id:
+  put:
+    summary: Route for editing a record
+    responses:
+      status: '200'
+      message: {
+         message: {String: 'Image updated successfully'}
+      }
+      body: {
+         option: raw,
+         payload: {
+
+         }
+      }
+```
+
+Delete route
+```
+ {URL}/api/v1/delete/:id:
+  delete:
+    summary: Route for getting all records
+    responses:
+      status: '200'
+      message: {
+         message: {String: 'Image deleted successfully'},
+         image: {String: 'item no longer exists'}
+      }
+```
