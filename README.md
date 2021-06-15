@@ -102,7 +102,7 @@ Get one route
     responses:
       status: '200'
       message: {
-         message: {String: 'Image successfully fetched'}
+         message: {String: 'Stock successfully fetched'}
       }
 ```
 
@@ -114,7 +114,7 @@ Create route
     responses:
       status: '200'
       message: {
-         message: {String: 'Image successfully added'}
+         message: {String: 'Stock successfully added'}
       }
       body: {
          option: raw,
@@ -132,7 +132,7 @@ Edit route
     responses:
       status: '200'
       message: {
-         message: {String: 'Image updated successfully'}
+         message: {String: 'Stock item updated successfully'}
       }
       body: {
          option: raw,
@@ -150,7 +150,7 @@ Delete route
     responses:
       status: '200'
       message: {
-         message: {String: 'Image deleted successfully'},
+         message: {String: 'Stock item deleted successfully'},
          image: {String: 'item no longer exists'}
       }
 ```
