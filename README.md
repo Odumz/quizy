@@ -8,16 +8,16 @@ at point of purchase, and daily profit and loss results.
 
 
 ## Folder Structure
-1.  src
-     -- controllers
-     -- db
-     -- routes
-     -- models
-     -- services
-     -- utils
-    test
-    views*
-    .env
+1.  src  // folder containing all relevant source code
+     -- controllers  // to handle our logic
+     -- db  // for our database configuration
+     -- routes  // for our endpoints
+     -- models  // for our database and relationships
+     -- services  // for some services
+     -- utils  // for utilities
+    test  // test folder
+    views*  // for a simple templating language to generate HTML
+    .env  // environment variables; for secret things
    
 ## Installation and Usage
 
