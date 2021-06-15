@@ -18,7 +18,9 @@ hi-fi link: here
 ```
 
 ## Folder Structure
-1.  src  // folder containing all relevant source code
+The folder is structured like below
+```sh
+   src  // folder containing all relevant source code
      -- controllers  // to handle our logic
      -- db  // for our database configuration
      -- routes  // for our endpoints
@@ -28,6 +30,7 @@ hi-fi link: here
     test  // test folder
     views*  // for a simple templating language to generate HTML
     .env  // environment variables; for secret things
+```
    
 ## Installation and Usage
 
