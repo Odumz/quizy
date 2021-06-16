@@ -8,13 +8,13 @@ at point of purchase, and daily profit and loss results.
 
 Documentation Link
 ```sh
-document link here
+   document link here
 ```
 
 Design Link
 ```sh
-lo-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1
-hi-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0
+   lo-fi link: [https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1)
+   hi-fi link: [https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0)
 ```
 
 ## Folder Structure
@@ -22,14 +22,14 @@ hi-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3
 The folder is structured like below
 
 ```sh
-   src  // folder containing all relevant source code
+   src  // folder containing all relevant code
      -- controllers  // to handle our logic
      -- db  // for our database configuration
      -- routes  // for our endpoints
      -- models  // for our database and relationships
      -- services  // for some services
      -- utils  // for utilities
-    test  // test folder
+    tests  // tests folder
     views*  // for a simple templating language to generate HTML
     .env  // environment variables; for secret things
 ```
