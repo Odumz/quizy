@@ -12,10 +12,8 @@ Documentation Link
 ```
 
 Design Link
-```sh
-lo-fi link: (https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1 "https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1")
-hi-fi link: (https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0 "https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0")
-```
+ * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
+ * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A00)
 
 ## Folder Structure
 
@@ -23,15 +21,15 @@ The folder is structured like below
 
 ```sh
    src  // folder containing all relevant code
-     -- controllers  // to handle our logic
-     -- db  // for our database configuration
-     -- routes  // for our endpoints
-     -- models  // for our database and relationships
-     -- services  // for some services
-     -- utils  // for utilities
+     -- controllers  // to handle business logic
+     -- db  // to handle database configuration
+     -- routes  // to handle endpoints
+     -- models  // to handle database and relationships
+     -- services  // to handle some services
+     -- utils  // to handle utilities
     tests  // tests folder
-    views*  // for a simple templating language to generate HTML
-    .env  // environment variables; for secret things
+    views*  // to handle a simple templating language to generate HTML
+    .env  // environment variables; to handle secret credentials
 ```
    
 ## Installation and Usage
@@ -58,7 +56,8 @@ The folder is structured like below
    - issues will be created based on features/components
    - issues will be assigned to teammates
    - devs should fork and clone the repo 
-   - devs should create a branch out of branch develop based on feature/issues assigned to them e.g ft-nav_bar
+   - devs should create a branch out of branch develop based on feature/issues 
+     assigned to them e.g ft-nav_bar
    - devs should push to branch develop and create a pull request when done
    - code should be hosted on gh pages or netlify 
    - hosted link should be added as a comment on issues
