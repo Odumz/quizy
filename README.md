@@ -14,11 +14,13 @@ document link here
 Design Link
 ```sh
 lo-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1
-hi-fi link: here
+hi-fi link: https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0
 ```
 
 ## Folder Structure
+
 The folder is structured like below
+
 ```sh
    src  // folder containing all relevant source code
      -- controllers  // to handle our logic
