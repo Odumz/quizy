@@ -8,7 +8,7 @@ const path = require("path"),
 // Config Env   
 dotenv.config({ path: path.resolve(__dirname, "../../config.env") });
 
-const mongoURI = process.env.MONGO_URI_LOCAL;
+const mongoURI = process.env.MONGO_URI_LOCAL_CLOUD;
      
 mongoose
   .connect(mongoURI, {

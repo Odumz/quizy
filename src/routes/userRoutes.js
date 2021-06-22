@@ -1,6 +1,7 @@
 const express = require("express"),
       
       authController = require("../controllers/autthControl"),
+      User = require("../models/Users"),
       router = express.Router();
 
 /**
@@ -61,7 +62,25 @@ const express = require("express"),
  *               status: success
  *               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2UzNjQ2MzdlMTJhM2JiYzZjOGZmYiIsImlhdCI6MTYyNDIxNDg1NywiZXhwIjoxNjMxOTkwODU3fQ.-wqN0WBEoyTEwMu7HUJxvXGcYWuknKvo-FcccBsJy6k   
  */
+ router.get("/",  async  (req, res) => {
+    try {
+      const users = await User.find();
+      res.status(201).json({ 
+        status: "success",
+        data: users
+      });  
+    } catch (err) {
+        res.status(400).json({ 
+            status: "failed", 
+            error: {
+              message: `${err.message}`
+            } 
+          });
+    }
+  });
 
 router.post("/login", authController.loginUser);
+
+router.post("/register", authController.registerUser);
 
 module.exports = router;

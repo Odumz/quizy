@@ -120,12 +120,16 @@ const usersSchema = new mongoose.Schema({
     }
   },
 
+  // Password change date
+  passwordChangedAt: Date,
+
   // Role
   role: {
     type: String,
     enum: ["user", "admin"],
     default: "user"
-  }
+  },
+
 });
 
 // password hash
@@ -147,7 +151,22 @@ usersSchema.methods.comparePassword = async function(
   userPassword) {
   return await bcrypt.compare(requestPassword, userPassword);
 };
+/*
+// password changed after login instance
+usersSchema.methods.passwordChangedAfterLogin = function(
+  JWTTimestamp
+) {
+  if(this.passwordChangedAt) {
+    const convertedTimestamp = parseInt(this.passwordChangedAt.getTime() /1000,
+      10
+    );
+      return JWTTimestamp < convertedTimestamp;
+  }
 
+  // default - !changed
+  return false;
+}
+*/
 // MODEL
 const User = mongoose.model("User", usersSchema);
 

@@ -1,5 +1,6 @@
-const path = require("path"),
+const { promisify } = require("util"),
 
+      path = require("path"),
       dotenv = require("dotenv"),
       jwt = require("jsonwebtoken"),
       User = require("../models/Users");
@@ -16,35 +17,36 @@ const signToken = id => {
   );
 };
 
-// exports.registerUser = async (req, res, next) => {
-//   try {
-//     // create new user
-//     const newUser = await User.create({
-//       firstName: req.body.firstName,
-//       lastName: req.body.lastName,
-//       email: req.body.email,
-//       phoneNumber: req.body.phoneNumber,
-//       password: req.body.password,
-//       passwordConfirm: req.body.passwordConfirm
-//     });
+exports.registerUser = async (req, res, next) => {
+  try {
+    // create new user
+    const newUser = await User.create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phoneNumber: req.body.phoneNumber,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+      passwordChangedAt: req.body.passwordChangedAt
+    });
 
-//     const token = signToken(newUser._id);
+    const token = signToken(newUser._id);
 
-//     res.status(201).json({ 
-//       status: "success",
-//       token, 
-//       data: newUser
-//     });
+    res.status(201).json({ 
+      status: "success",
+      token, 
+      data: newUser
+    });
 
-//   } catch (err) {
-//       res.status(400).json({ 
-//         status: "failed", 
-//         error: {
-//           message: `${err.message}`
-//         } 
-//       });
-//   }
-// };
+  } catch (err) {
+      res.status(400).json({ 
+        status: "failed", 
+        error: {
+          message: `${err.message}`
+        } 
+      });
+  }
+};
 
 /*
  * @route POST api/v1/login
@@ -92,3 +94,63 @@ exports.loginUser = async (req, res, next) => {
       });
   }
 };
+
+
+/*
+exports.protectRoute = async (req, res, next) => {
+  try {
+    // get token from req.headers
+  let token;
+  if (req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+     ) {
+       token = req.headers.authorization.split(" ")[1];
+     }
+
+  // check if there's token in reqq.headers
+  if (!token) {
+    res.status(401).json({ 
+      status: "failed", 
+      error: {
+        message: "You must log in first, please log in."
+      } 
+    });
+  }
+
+  // verify token
+  const decoded = await promisify (jwt.verify) (token, process.env.JWT_SECRET);
+
+  // check if user still exist
+  const latestUser = await User.findById(decoded.id);
+  if (!latestUser) {
+    res.status(401).json({ 
+      status: "failed", 
+      error: {
+        message: "User with this token does no longer exist."
+      } 
+    });
+  }
+
+  if (latestUser.passwordChangedAfterLogin(decoded.iat)) {
+    res.status(401).json({ 
+      status: "failed", 
+      error: {
+        message: "Password recently changed, please log in again."
+      } 
+    });
+  }
+
+  // grant access
+  req.user = latestUser;
+  next();
+
+  } catch (err) {
+      res.status(400).json({ 
+        status: "failed", 
+        error: {
+          message: `${err.message}`
+        } 
+      });
+  }
+}
+*/

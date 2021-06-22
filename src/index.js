@@ -5,6 +5,7 @@ const express = require("express"),
       app = express();
 
 const userRouter = require("./routes/userRoutes");
+      // stockRouter = require("./routes/stockRoutes");
 
 // Config Env   
 dotenv.config({path: "./config.env"});
@@ -21,6 +22,7 @@ app.use(express.urlencoded({extended: false})); // handle form submission
 
 // ROUTES
 app.use("/api/v1", userRouter);
+// app.use("/api/v1/stock", stockRouter);
 
 // SWAGGER
 require("./utils/swagger");
