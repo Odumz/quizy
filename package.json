@@ -1,0 +1,39 @@
+{
+  "name": "Stocka-be-pjt-102",
+  "version": "1.0.0",
+  "description": "Backend for Stocka project",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jerry299/Stocka-be-pjt-102.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jerry299/Stocka-be-pjt-102/issues"
+  },
+  "homepage": "https://github.com/Jerry299/Stocka-be-pjt-102#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.14",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.29.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.7"
+  }
+}
