@@ -1,25 +1,36 @@
-const path = require("path"),
+/**
+ *  Create a connection function for mongodb
+ *  Start a local mongodb server connection
+ *  Test for database connection or disconnection
+ */
 
-      mongoose = require("mongoose"),
-      dotenv = require("dotenv"),      
-      dbConnectedMsg = `[Connection to mongodb successful... ]`,
-      dbNotConnectedMsg = `[Connection to mongodb not successful... ]`;
+const mongoose = require("mongoose"),
+      dotenv = require("dotenv");
 
 // Config Env   
-dotenv.config({ path: path.resolve(__dirname, "../../config.env") });
+dotenv.config();
 
-const mongoURI = process.env.MONGO_URI_LOCAL_CLOUD;
-     
-mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  }).then(() => {
-      console.log(`${dbConnectedMsg}`)
-  }).catch((err) => {
-      console.error(`${dbNotConnectedMsg}`, err.message)
-  });
+const { MONGO_URI } = process.env;
 
+// create the connection function
+const connectDB = async () => {
+    try {
+        await mongoose.connect(MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true,
+            useFindAndModify: false
+        });
 
+        console.log("MongoDB connection successful");
+
+        // seed data
+    } catch (error) {
+        console.error(error.message)
+        console.log("MongoDB connection fail");
+        setTimeout(connectDB(), 5000)
+        process.exit(1);
+    }
+}
+
+module.exports = connectDB;

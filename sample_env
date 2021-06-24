@@ -1,0 +1,9 @@
+PORT=5004
+MONGO_URI='connectionstringhere'
+JWTSECRET='0very1unsecure2secret3'
+JWTEXPIRY=1h
+CLOUDINARY_API_KEY=someapikey
+CLOUDINARY_API_SECRET=somesecret
+CLOUDINARY_CLOUD_NAME="somename"
+FINNHUB_API=someapikey
+FINNHUB_BASE_URL='https://finnhub.io/api/v1/'

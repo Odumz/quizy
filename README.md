@@ -6,14 +6,27 @@ This is an an inventory digital solution that will take account of trader's sale
 Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
 at point of purchase, and daily profit and loss results.
 
-Documentation Link
+Useful Links
 ```sh
-   document link here
+   Find the necessary links here
+   Documentation Link
+   * [Stocka Documentation](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
+
+   Design Link
+   * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
+   * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A00)
+   * [User-flow and prototype link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A00)
+
+
+   Frontend development link
+   * [Stocka frontend](https://stocka-frontend.netlify.app/)
+
+
+   Backend development link
+   * [Stocka API](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
 ```
 
-Design Link
- * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
- * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A00)
+
 
 ## Folder Structure
 
