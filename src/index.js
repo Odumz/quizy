@@ -45,7 +45,7 @@ const finnhub = require('./services/finnhub')
 const routes = require("./routes");
 
 // enable env
-dotenv.config({path: "./.env.local"});
+dotenv.config();
 // dotenv.config({path: "./.env.development"});
 // dotenv.config({path: "./.env.production"});
 
