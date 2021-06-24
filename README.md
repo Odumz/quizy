@@ -14,7 +14,7 @@ at point of purchase, and daily profit and loss results.
 
    Design Link
    * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1)
-   * [Hi-fi link](hhttps://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0)
+   * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0)
    * [User-flow and prototype link](#)
 
 
@@ -25,7 +25,8 @@ at point of purchase, and daily profit and loss results.
    Backend development link
    * [Stocka API](#)
    * [Stocka API - Demo](https://stocka-demo.herokuapp.com/)
-   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs)* [Stocka API - Postman docs](https://www.getpostman.com/collections/75b079c2c14ac7fac3f3)
+   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs
+   * [Stocka API - Postman docs](https://www.getpostman.com/collections/75b079c2c14ac7fac3f3)
 
 
 

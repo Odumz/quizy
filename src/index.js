@@ -25,6 +25,9 @@ const swaggerOptions = {
     servers: [
       {
         url: 'http://localhost:5002/api/v1'
+      },
+      {
+        url: 'https://stocka-demo.herokuapp.com/api/v1'
       }
     ]
   },
