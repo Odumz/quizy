@@ -50,12 +50,6 @@ class authController {
           return res.status(500).json({ err });
       })
     }).catch(err => {
-      if(err.code === '11000'){
-        res.json({
-            msg:'The phone number has already been registered, please change the phone number',
-            success:false
-        })
-    }
         return res.status(500).json({ err });
     });
   }
@@ -91,7 +85,7 @@ class authController {
   static async fetchUser (req, res) {
     try {
       const users = await User.find();
-      console.log(users)
+      // console.log(users)
       res.status(201).json({ 
         status: "success",
         data: users

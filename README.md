@@ -6,9 +6,9 @@ This is an an inventory digital solution that will take account of trader's sale
 Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
 at point of purchase, and daily profit and loss results.
 
-Useful Links
-```sh
+### Useful Links
    Find the necessary links here
+
    Documentation Link
    * [Stocka Documentation](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
 
@@ -24,7 +24,8 @@ Useful Links
 
    Backend development link
    * [Stocka API](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A10)
-```
+   * [Stocka API - Demo](https://stocka-demo.herokuapp.com/)
+   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs)* [Stocka API - Postman docs](https://www.getpostman.com/collections/75b079c2c14ac7fac3f3)
 
 
 

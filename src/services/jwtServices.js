@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { JWTSECRET, JWTEXPIRY } = process.env;
 
-console.log('hid');
+// console.log('hid');
 
-console.log(JWTSECRET);
+// console.log(JWTSECRET);
 
-console.log('lo');
+// console.log('lo');
 
 // for token creation and verification
 class jwtServices {

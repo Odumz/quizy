@@ -46,8 +46,6 @@ const routes = require("./routes");
 
 // enable env
 dotenv.config();
-// dotenv.config({path: "./.env.development"});
-// dotenv.config({path: "./.env.production"});
 
 // import port from env
 const { PORT } = process.env;

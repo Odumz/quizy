@@ -17,8 +17,10 @@ router.get('/', (req, res) => {
     });
   });
 
+// initialize the auth routes
 router.use('/auth', userRoutes);
 
+// initialize the stock routes
 router.use('/stocks', stockRoutes);
 
 module.exports = router;
