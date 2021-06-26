@@ -194,7 +194,7 @@ router.get("/peers", finnhub.getPeers);
  *             example: 
  *               
 */
-router.get("/earning-suprises", finnhub.getEarningSurprises);
+router.get("/earning-surprises", finnhub.getEarningSurprises);
 
 /**
 *  @swagger
