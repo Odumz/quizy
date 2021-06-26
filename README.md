@@ -75,7 +75,7 @@ The folder is structured like below
    - devs should create a branch out of branch develop based on feature/issues 
      assigned to them e.g ft-nav_bar
    - devs should push to branch develop and create a pull request when done
-   - code should be hosted on gh pages or netlify 
+   - code should be hosted on heroku
    - hosted link should be added as a comment on issues
 ```
 
