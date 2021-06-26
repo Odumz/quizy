@@ -5,6 +5,7 @@ const express = require("express"),
       app = express(),
       morgan = require('morgan');
 
+const { errorRes, successRes } = require('./utils/responseHandler');
       
 // enable swagger for documentation
 const swaggerUI = require('swagger-ui-express')
@@ -67,17 +68,21 @@ app.use(express.urlencoded({ limit: "50mb", extended: false })); // handle form 
 app.use("/api/v1", routes);
 
 // simple route
-app.get("/", (req, res) => {
-  res.status(200).send('Welcome to Stocka application with nodejs and mongodb.');
-});
+app.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to Stocka application with nodejs and mongodb.'}));
 
+app.all('*', (req, res, next) => errorRes(next, 404, 'The Route you are requesting for does not exist'));
 
 const port = process.env.PORT || PORT;
 
 // error handling middleware
 app.use((err,req,res,next) => {
-    //console.log(err);
-    res.status(422).send({error: err.message});
+  //console.log(err);
+  // res.status(404).send({error: err.message});
+  res.status(err.status >= 100 && err.status < 600 ? err.status : 500);
+  res.send({
+    status: err.status ? err.status : 500,
+    error: err.message,
+  });
 });
 
 // listen for requests

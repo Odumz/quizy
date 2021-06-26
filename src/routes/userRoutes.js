@@ -2,6 +2,7 @@
 const express = require("express");
 const authController = require("../controllers/authController"); // auth controller
 const router = express.Router(); // enable router
+const { successRes } = require('../utils/responseHandler');
 
 /**
  * @swagger
@@ -79,11 +80,7 @@ const router = express.Router(); // enable router
  *             example: 
  * 
 */
-router.get("/", (req, res) =>{
-    res.status(200).json({
-          message: "This is auth routes"
-    })
-});
+router.get("/", (req, res) => successRes(res, 200, { message: 'This is auth routes'}));
 
 /**
  * @swagger
