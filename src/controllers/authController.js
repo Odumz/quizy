@@ -1,94 +1,119 @@
 const { createToken } = require("../services/jwtServices"),
       bcrypt = require('bcryptjs'),
       User = require("../models/Users");
+const { errorRes, successRes } = require('../utils/responseHandler');
 
 class authController {
   // register a user
   static async userRegistration(req, res, next) {
-    User.findOne({email: req.body.email}).then(existingUser => {
+    const {firstname, lastname, email, password, phone, role} = req.body;
+    if (!firstname || !lastname || !email || !password || !phone) {
+      return errorRes(next, 400, 'Bad request, missing some details.');
+    }
+    if (password.length < 8) {
+      return errorRes(next, 400, 'Password can\'t be less than 8 characters');
+    }
+    User.findOne({email}).then(existingUser => {
       // check if a user with this email exists
       if (existingUser) {
-          return res.status(400).json({
-              message: "A user with this email already exists"
-          });
+          return errorRes(next, 409, 'A user with this email already exists.');
       }
-      // console.log("1");
+      // console.log(existingUser);
 
       // create a new user
       User.create({
-          firstname: req.body.firstname,
-          lastname: req.body.lastname,
-          phone: req.body.phone,
-          email: req.body.email,
-          role: req.body.role
+          firstname,
+          lastname,
+          phone,
+          email,
+          role
       })
       .then(newUser => {
           // hash the password
           // console.log(EXPIRY);
           // console.log("2");
           bcrypt.genSalt(10, (err, salt) => {
-              bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+              bcrypt.hash(password, salt, (err, hashedPassword) => {
                   // save the password to the db
                   // console.log(3);
                   newUser.password = hashedPassword;
                   newUser.save((err, savedUser) => {
                       // create jwt for user
                       createToken(newUser).then(token => {
-                          // console.log(token)
-                          return res.status(200).json({
-                              message: "User registration successful",
-                              token
+                        // console.log(token)
+                          const user = {
+                            id: newUser.id,
+                            firstname: newUser.firstname,
+                            lastname: newUser.lastname,
+                            email: newUser.email,
+                            phone: newUser.phone,
+                            role: newUser.role
+                          }
+                          return successRes(res, 201, {
+                            message: "User registration successful",
+                            user,
+                            token
                           })
-                      }).catch(err => {
-                          return res.status(500).json({ err });
+                      }).catch(error => {
+                          return errorRes(next, 422, 'Could not create user.');
                       })
                   });
               })
           })
       })
       .catch(err => {
-          return res.status(500).json({ err });
+          return errorRes(next, 400, 'Bad request, missing some details.');
       })
     }).catch(err => {
-        return res.status(500).json({ err });
+      return errorRes(next, 500, 'Internal server error.');
     });
   }
 
   // login a user
   static async userLogin(req, res, next) {
-      User.findOne({ email: req.body.email }).then(foundUser => {
-          if (!foundUser) {
-              return res.status(401).json({
-                  message: "Email or password is incorrect"
-              })
-          }
+    const {email, password} = req.body;
+    if (!email || !password) {
+      return errorRes(next, 400, 'Bad request, missing some details.');
+    }
+    User.findOne({ email }).then(foundUser => {
+        if (!foundUser) {
+            return errorRes(next, 401, 'Email or password is incorrect.')
+        }
 
-          let pwdmatch = bcrypt.compareSync(req.body.password, foundUser.password)
-          if (!pwdmatch) {
-              return res.status(401).json({
-                  message: "Email or password is incorrect"
-              })
-          }
-          
-          createToken(foundUser).then(token => {
-              // console.log(token)
-              return res.status(200).json({
-                  message: "User logged in succuessful",
-                  token
-              });
-          })
-      }).catch(err => {
-          return res.status(500).json({ err });
-      });
+        let pwdmatch = bcrypt.compareSync(password, foundUser.password)
+        if (!pwdmatch) {
+            return errorRes(next, 401, 'Email or password is incorrect.')
+        }
+        
+        createToken(foundUser).then(token => {
+            console.log(token)
+            const user = {
+              id: foundUser.id,
+              firstname: foundUser.firstname,
+              lastname: foundUser.lastname,
+              email: foundUser.email,
+              phone: foundUser.phone,
+              role: foundUser.role
+            }
+            return successRes(res, 200, {
+              message: "User logged in successfully",
+              user,
+              token
+          });
+        })
+    }).catch(err => {
+      errorRes(next, 500, 'Internal server error.');
+    });
   }
 
   static async fetchUser (req, res) {
     try {
       const users = await User.find();
       // console.log(users)
-      res.status(201).json({ 
-        status: "success",
-        data: users
+      successRes(res, 200, {
+        message: "Users fetched successfully",
+        count: users.length,
+        users
       });  
     } catch (err) {
         res.status(400).json({ 
@@ -103,73 +128,3 @@ class authController {
 }
 
 module.exports = authController;
-
-// Token signature
-// const signToken = id => {
-//   return jwt.sign(
-//     { id },
-//     process.env.JWT_SECRET,
-//     {expiresIn: process.env.JWT_EXPIRY}
-//   );
-// };
-
-
-
-/*
-exports.protectRoute = async (req, res, next) => {
-  try {
-    // get token from req.headers
-  let token;
-  if (req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer")
-     ) {
-       token = req.headers.authorization.split(" ")[1];
-     }
-
-  // check if there's token in reqq.headers
-  if (!token) {
-    res.status(401).json({ 
-      status: "failed", 
-      error: {
-        message: "You must log in first, please log in."
-      } 
-    });
-  }
-
-  // verify token
-  const decoded = await promisify (jwt.verify) (token, process.env.JWT_SECRET);
-
-  // check if user still exist
-  const latestUser = await User.findById(decoded.id);
-  if (!latestUser) {
-    res.status(401).json({ 
-      status: "failed", 
-      error: {
-        message: "User with this token does no longer exist."
-      } 
-    });
-  }
-
-  if (latestUser.passwordChangedAfterLogin(decoded.iat)) {
-    res.status(401).json({ 
-      status: "failed", 
-      error: {
-        message: "Password recently changed, please log in again."
-      } 
-    });
-  }
-
-  // grant access
-  req.user = latestUser;
-  next();
-
-  } catch (err) {
-      res.status(400).json({ 
-        status: "failed", 
-        error: {
-          message: `${err.message}`
-        } 
-      });
-  }
-}
-*/

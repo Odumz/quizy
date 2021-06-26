@@ -28,7 +28,6 @@ const connectDB = async () => {
     } catch (error) {
         console.error(error.message)
         console.log("MongoDB connection fail");
-        setTimeout(connectDB(), 5000)
         process.exit(1);
     }
 }

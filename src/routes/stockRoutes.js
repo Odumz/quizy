@@ -1,7 +1,9 @@
 // import required constants
 const express = require("express")
 const finnhub = require("../services/finnhub"), // auth controller
-      router = express.Router(); // enable router
+      router = express.Router(); // enable router;
+
+const { successRes } = require('../utils/responseHandler');
 
 /**
  * @swagger
@@ -35,11 +37,7 @@ const finnhub = require("../services/finnhub"), // auth controller
  *             example: 
  * 
 */
-router.get("/", (req, res) =>{
-      res.status(200).json({
-            message: "This is stock routes"
-      })
-});
+router.get("/", (req, res) => successRes(res, 200, { message: 'This is stock routes'}));
 
 /**
 *  @swagger
@@ -123,13 +121,13 @@ router.get("/company-news", finnhub.getCompanyNews);
 /**
 *  @swagger
 *  paths:
-*   /stocks/news-sentiment:
+*   /stocks/social-sentiment:
 *     get:
-*       summary: get news sentiment
+*       summary: get social sentiment
 *       tags: [Stock]
 *       responses:
 *         "200":
-*           description: get news sentiment
+*           description: get social sentiment
 *           content:
 *             application/json:
 *               schema:
@@ -144,18 +142,18 @@ router.get("/company-news", finnhub.getCompanyNews);
  *             example: 
  *               
 */
-router.get("/news-sentiment", finnhub.getNewsSentiment);
+router.get("/social-sentiment", finnhub.getSocialSentiment);
 
 /**
 *  @swagger
 *  paths:
-*   /stocks/basic-financials:
+*   /stocks/peers:
 *     get:
-*       summary: get basic financials
+*       summary: get peers
 *       tags: [Stock]
 *       responses:
 *         "200":
-*           description: get basic financials
+*           description: get peers
 *           content:
 *             application/json:
 *               schema:
@@ -170,18 +168,18 @@ router.get("/news-sentiment", finnhub.getNewsSentiment);
  *             example: 
  *               
 */
-router.get("/basic-financials", finnhub.getBasicFinancials);
+router.get("/peers", finnhub.getPeers);
 
 /**
 *  @swagger
 *  paths:
-*   /stocks/ipo-calendar:
+*   /stocks/earning-suprises:
 *     get:
-*       summary: get ipo calendar
+*       summary: get earning surprises
 *       tags: [Stock]
 *       responses:
 *         "200":
-*           description: get ipo calendar
+*           description: get earning surprises
 *           content:
 *             application/json:
 *               schema:
@@ -196,7 +194,7 @@ router.get("/basic-financials", finnhub.getBasicFinancials);
  *             example: 
  *               
 */
-router.get("/ipo-calendar", finnhub.getIPOCalendar);
+router.get("/earning-suprises", finnhub.getEarningSurprises);
 
 /**
 *  @swagger
@@ -253,13 +251,13 @@ router.get("/stock-candle", finnhub.getStockCandle);
 /**
 *  @swagger
 *  paths:
-*   /stocks/forex-candles:
+*   /stocks/earning-calendar:
 *     get:
-*       summary: get forex candles
+*       summary: get earnings calendar
 *       tags: [Stock]
 *       responses:
 *         "200":
-*           description: get forex candles
+*           description: get earnings calendar
 *           content:
 *             application/json:
 *               schema:
@@ -274,18 +272,18 @@ router.get("/stock-candle", finnhub.getStockCandle);
  *             example: 
  *               
 */
-router.get("/forex-candles", finnhub.getForexCandles);
+router.get("/earning-calendar", finnhub.getEarningsCalendar);
 
 /**
 *  @swagger
 *  paths:
-*   /stocks/forex-rates:
+*   /stocks/quote:
 *     get:
-*       summary: get forex rates
+*       summary: get quote
 *       tags: [Stock]
 *       responses:
 *         "200":
-*           description: get forex rates
+*           description: get quote
 *           content:
 *             application/json:
 *               schema:
@@ -300,32 +298,6 @@ router.get("/forex-candles", finnhub.getForexCandles);
  *             example: 
  *               
 */
-router.get("/forex-rates", finnhub.getForexRates);
-
-/**
-*  @swagger
-*  paths:
-*   /stocks/crypto-candle:
-*     get:
-*       summary: get crypto candle
-*       tags: [Stock]
-*       responses:
-*         "200":
-*           description: get crypto candle
-*           content:
-*             application/json:
-*               schema:
-*                 $ref: ''
- *               properties:
- *                 status:
- *                   type: string
- *                   description: Response status
- *                 token:
- *                   type: string
- *                   description: JWT client token
- *             example: 
- *               
-*/
-router.get("/crypto-candle", finnhub.getCryptoCandle);
+router.get("/quote", finnhub.getQuote);
 
 module.exports = router;

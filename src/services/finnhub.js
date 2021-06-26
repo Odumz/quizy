@@ -3,6 +3,7 @@ const finnhub = require('finnhub')
 const axios = require('axios');
 require('dotenv').config();
 const { FINNHUB_API, FINNHUB_BASE_URL } = process.env;
+const { errorRes, successRes } = require('../utils/responseHandler');
 
 // Load method categories.
 const lodash = require('lodash');
@@ -19,11 +20,7 @@ class stockAPI {
         await axios.post('https://finnhub.io/api/v1/webhook/add?token=c36tleqad3ib6g7eequg', {'event': 'earnings', 'symbol': 'AAPL'})
         .then((response) => {
             // console.log("webhook", response.data)
-            const webhook  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const webhook  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -37,11 +34,7 @@ class stockAPI {
         await axios.get('https://finnhub.io/api/v1/webhook/list?token=c36tleqad3ib6g7eequg', {'event': 'earnings', 'symbol': 'AAPL'})
         .then((response) => {
             // console.log("list webhook", response.data)
-            const listWebhook  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const listWebhook  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -60,11 +53,7 @@ class stockAPI {
         .get(url)
         .then(response => {
             // console.log("symbol lookup returned", response.data)
-            const symbollookup  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const symbollookup  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -83,11 +72,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("stock symbol returned", response.data)
-            const stocksymbol  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const stocksymbol  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -107,11 +92,7 @@ class stockAPI {
         .get(url)
         .then(response => {
             // console.log("company profile returned", response.data)
-            const profile  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))   
+            const profile  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))   
         })
         .catch(error => {
         //   console.log(error)
@@ -130,11 +111,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("market news returned", response.data)
-            const marketnews  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const marketnews  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -153,11 +130,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("Company news returned", response.data)
-            const companynews  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const companynews  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -176,11 +149,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("news sentiment returned", response.data)
-            const newssentiment  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const newssentiment  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -199,11 +168,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("peers returned", response.data)
-            const peers  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const peers  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -222,11 +187,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("basic financials returned", response.data)
-            const basicfinancials  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const basicfinancials  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -245,11 +206,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("insider transactions returned", response.data)
-            const insidertransaction  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const insidertransaction  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -268,11 +225,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("financials as reported returned", response.data)
-            const far  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const far  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -291,11 +244,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("sec filings returned", response.data)
-            const secfiling  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const secfiling  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -314,11 +263,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("IPO calendar returned", response.data)
-            const ipocalendar  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const ipocalendar  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -337,11 +282,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("recommendation trends returned", response.data)
-            const recommendation  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const recommendation  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -360,11 +301,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("earnings surprises returned", response.data)
-            const earningsuprises  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const earningsuprises  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -383,11 +320,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("earnings calendar returned", response.data)
-            const earningcalendar   = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const earningcalendar   = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -406,11 +339,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("Quote returned", response.data)
-            const quote   = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const quote   = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -429,11 +358,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("stock candle returned", response.data)
-            const stockcandle   = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const stockcandle   = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -452,11 +377,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("indices constituents returned", response.data)
-            const indicesconstituents   = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const indicesconstituents   = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -475,11 +396,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("etf sector exposure returned", response.data)
-            const eftsectorexpo   = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const eftsectorexpo   = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -498,11 +415,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("etf country exposure returned", response.data)
-            const eftcountryexpo  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const eftcountryexpo  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -521,11 +434,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("forex exchanges returned", response.data)
-            const forexexchange  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const forexexchange  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -544,11 +453,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("forex symbol returned", response.data)
-            const forexsymbol  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const forexsymbol  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -567,11 +472,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("forex candle returned", response.data)
-            const forexcandle  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const forexcandle  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -590,11 +491,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("forex rates returned", response.data)
-            const forexrate  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const forexrate  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -613,11 +510,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("crypto exchange returned", response.data)
-            const cryptoexchange  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const cryptoexchange  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -636,11 +529,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("crypto symbol returned", response.data)
-            const cryptosymbol  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const cryptosymbol  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -659,11 +548,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("crypto candle returned", response.data)
-            const cryptocandle  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const cryptocandle  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -682,11 +567,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("pattern recognition returned", response.data)
-            const patternrecognition  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const patternrecognition  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -705,11 +586,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("support/resistance returned", response.data)
-            const support  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const support  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -728,11 +605,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("aggregator indicators returned", response.data)
-            const aggregator  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const aggregator  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -751,11 +624,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("technical indicator returned", response.data)
-            const technicalindicator  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const technicalindicator  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -774,11 +643,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("social sentiment returned", response.data)
-            const socialsentiment  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const socialsentiment  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -797,11 +662,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("covid returned", response.data)
-            const covid  = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))   
+            const covid  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -820,11 +681,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("FDA committee meeting calendar returned", response.data)
-            const fdacalendar = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const fdacalendar = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -843,11 +700,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("country metadata returned", response.data)
-            const countrymetadata = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const countrymetadata = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
@@ -866,11 +719,7 @@ class stockAPI {
         .get(url)
         .then((response) => {
             // console.log("economic calendar returned", response.data)
-            const economiccalendar = !lodash.isEmpty(response.data) ? (res.status(200).json({
-                data: response.data
-            })) : (res.status(500).json({
-                error: 'Whoops! Call houston.'
-            }))
+            const economiccalendar = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
         })
         .catch(error => {
         //   console.log(error)
