@@ -2,6 +2,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { JWTSECRET, JWTEXPIRY } = process.env;
+const { errorRes, successRes } = require('../utils/responseHandler');
 
 // console.log('hid');
 
@@ -9,7 +10,7 @@ const { JWTSECRET, JWTEXPIRY } = process.env;
 
 // console.log('lo');
 
-// for token creation and verification
+// for the token creation and verification
 class jwtServices {
     // creates token for user
     static async createToken (user) {
@@ -27,7 +28,7 @@ class jwtServices {
             return token
         } catch (error) {
             // console.log(error.name);
-            return null;
+            return errorRes(next, 422, 'Could not create token.');
         }
     }
 

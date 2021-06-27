@@ -1,20 +1,17 @@
 const jwt = require('jsonwebtoken')
 const { verifyToken } = require('../services/jwtServices')
+const { errorRes } = require('../utils/responseHandler');
 
 class Auth {
     static async authenticateUser (req, res, next) {
         if (!req.headers.authorization) {
-            return res.status(401).json({
-                message: "authorization header required"
-            })
+            return errorRes(next, 401, 'The authorization header is required')
         }
 
         let splitHeader = req.headers.authorization.split(' ');
         // console.log(splitHeader);
         if (splitHeader[0] !== "Bearer") {
-            return res.status(401).json({
-                message: "wrong authorization format used...bearer <token> expected</token>"
-            })
+            return errorRes(next, 401, 'wrong authorization format used...bearer <token> expected</token>')
         }        
 
         let token = splitHeader[1];
@@ -23,9 +20,7 @@ class Auth {
         let decodedToken = verifyToken(token);
 
         if (!decodedToken) {
-            return res.status(401).json({
-                message: "user not found"
-            });
+            return errorRes(next, 401, 'user not found');
         }
         
         // console.log("dectoken:", decodedToken)
@@ -37,9 +32,7 @@ class Auth {
 
     static async isAdminUser (req, res, next) {
         if (req.user.role !== "admin") {
-            return res.status(401).json({
-                message: "this route is restricted to admin users"
-            });
+            return rerrorRes(next, 401, 'this route is restricted to admin users');
         }
         return next()
     }
@@ -50,9 +43,7 @@ class Auth {
         // console.log(userRole);
         if (req.user.role !== "businessowner") {
             if (req.user.role !== "admin") {
-                return res.status(401).json({
-                    message: "you are not allowed on this route"
-                });
+                return errorRes(next, 401, 'you are not allowed on this route');
             }
         }
         return next()
