@@ -80,7 +80,7 @@ const { successRes } = require('../utils/responseHandler');
  *             example: 
  * 
 */
-router.get("/", (req, res) => successRes(res, 200, { message: 'This is auth routes'}));
+router.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to the Stocka API v1.0! This is auth routes'}));
 
 /**
  * @swagger
@@ -125,7 +125,7 @@ router.get("/", (req, res) => successRes(res, 200, { message: 'This is auth rout
 *       summary: Log all the users in
 *       tags: [Authentication]
 *       responses:
-*         "200":
+*         "201":
 *           description: The authentication and authorization of users.
 *           content:
 *             application/json:
@@ -153,28 +153,49 @@ router.post("/login", authController.userLogin);
 *       summary: Register all the users
 *       tags: [Authentication]
 *       responses:
-*         "200":
-*           description: The authentication and authorization of users.
+*         "201":
+*           description: 'The authentication and authorization of users.'
 *           content:
 *             application/json:
 *               schema:
 *                 $ref: '#/components/schemas/User'
- *               properties:
- *                 status:
- *                   type: string
- *                   description: Response status
- *                 token:
- *                   type: string
- *                   description: JWT client token
- *             example: 
- *               status: success
- *               token: eyJhbGciOiJIUzI11NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2UzNjQ2MzdlMTJhM2JiYzZjOGZmYiIsImlhdCI6MTYyNDIxNDg1NywiZXhwIjoxNjMxOTkwODU3fQ.-wqN0WBEoyTEwMu7HUJxvXGcYWuknKvo-FcccBsJy6k
- *               user: { firstname: Fola,
- *                       lastname: Arowolo,
- *                       email: user@email.com,
- *                       phone: 09051265526,
- *                       role: investor
- *                }
+*               properties:
+*                 status:
+*                   type: string
+*                   description: Response status
+*                 token:
+*                   type: string
+*                   description: JWT client token
+*             example:
+*               application/json; charset=utf-8:
+*                   status: 201
+*                   data: 
+*                      token: eyJhbGciOiJIUzI11NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2UzNjQ2MzdlMTJhM2JiYzZjOGZmYiIsImlhdCI6MTYyNDIxNDg1NywiZXhwIjoxNjMxOTkwODU3fQ.-wqN0WBEoyTEwMu7HUJxvXGcYWuknKvo-FcccBsJy6k
+*                      user: {
+*                          id: 5678,
+*                          firstname: Fola,
+*                          lastname: Arowolo,
+*                          email: user@email.com,
+*                          phone: 09051265526,
+*                          role: investor
+*                      }
+*                   message: User registered successfully
+*             headers:
+*               Connection:
+*                   type: string
+*                   default: keep-alive
+*               X-Powered-By:
+*                   type: string
+*                   default: keep-alive
+*         "409":
+*               description: 'Conflict.'
+*               schema:
+*                   $ref: '#/definitions/BadRequest'
+*               examples:
+*                   application/json:
+*                       status: 409
+*                       error: User with this email already exists
+*             
 */
 router.post("/register", authController.userRegistration);
 

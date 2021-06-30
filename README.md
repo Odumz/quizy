@@ -5,17 +5,12 @@ Backend for Stocka project
 This is an an inventory digital solution that will take account of trader's sales and stocks, calculates their profits or losses over a specific period of time and offer suggestions to build profits.
 Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
 at point of purchase, and daily profit and loss results.
-
-### Useful Links
-   Find the necessary links here
-
-   Documentation Link
-   * [Stocka Documentation](https://docs.google.com/document/d/1VlbtIi0LYe420zXiaVclYlyAURgoNqlpOFjwY4OBGEM/edit?usp=sharing)
+s
 
    Design Link
    * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1)
    * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0)
-   * [User-flow and prototype link](#)
+   * [User-flow and prototype link](https://www.figma.com/proto/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=1349%3A355&scaling=scale-down&page-id=535%3A0)
 
 
    Frontend development link
@@ -25,7 +20,7 @@ at point of purchase, and daily profit and loss results.
    Backend development link
    * [Stocka API](#)
    * [Stocka API - Demo](https://stocka-demo.herokuapp.com/)
-   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs
+   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs)
    * [Stocka API - Postman docs](https://www.getpostman.com/collections/75b079c2c14ac7fac3f3)
 
 
@@ -43,7 +38,7 @@ The folder is structured like below
      -- models  // to handle database and relationships
      -- services  // to handle some services
      -- utils  // to handle utilities
-    tests  // tests folder
+    test  // tests folder
     views*  // to handle a simple templating language to generate HTML
     .env  // environment variables; to handle secret credentials
 ```
@@ -68,23 +63,20 @@ The folder is structured like below
    ```
 
 ## Contribution guide
+   * [Contribution Guide](https://docs.google.com/document/d/1OTOpJ52unFRNgOP9uw-EZO7uZayeLFbditGahLxvD4c/edit?usp=sharing)
+
 ```sh
    - issues will be created based on features/components
    - issues will be assigned to teammates
    - devs should fork and clone the repo 
-   - devs should create a branch out of branch develop based on feature/issues 
-     assigned to them e.g ft-nav_bar
+   - devs should create a branch out of branch develop based on feature
+      issues assigned to them e.g ft-nav_bar
    - devs should push to branch develop and create a pull request when done
    - code should be hosted on heroku
    - hosted link should be added as a comment on issues
 ```
 
-The postman collection can be imported at 
-
 ## Routes and Usage
-
-The postman collection can be imported at 
-
 ### Environments
 <p>Local URL: http://localhost:5002</p>
 <p></p>Production URL: </p>

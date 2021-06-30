@@ -1,0 +1,715 @@
+swagger: "2.0"
+info:
+  description: "This is an API documentation for the STOCKA API server."
+  version: 1.0.0
+  title: Stocka API Documentation
+  license:
+    name: Apache 2.0
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: 
+  - stocka-demo.herokuapp.com
+tags:
+  - name: stock
+    description: Operations about stocks
+  - name: user
+    description: Operations about users
+  - name: test
+    description: Operations on testing the application
+schemes:
+  - http
+  - https
+paths:
+  /:
+    get:
+      tags:
+        - test
+      summary: Test server connection
+      description: Test the server connection
+      operationId: testServer
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to Stocka application with nodejs and mongodb!
+  /api/v1:
+    get:
+      tags:
+        - test
+      summary: Test api connection
+      description: Test the api connection
+      operationId: testAPI
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to the Stocka API v1.0! 
+  /api/v1/auth:
+    get:
+      tags:
+        - test
+      summary: Test auth API
+      description: Test the auth service connection
+      operationId: testAuth
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to the Stocka API v1.0! This is auth routes
+  /api/v1/stocks:
+    get:
+      tags:
+        - test
+      summary: Test stock API
+      description: Test the auth service connection
+      operationId: testStock
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to the Stocka API v1.0! This is stock routes
+  "/api/v1/auth/login":
+    post:
+      tags:
+        - user
+      summary: Authenticates user
+      description: "Allows user into the application if registered"
+      operationId: userLogin
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: email
+          in: formData
+          description: user's registered email address
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: user's registered password
+          required: true
+          type: string
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessLoginResponse"
+        "400":
+          description: Bad request, missing some details.
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/BadRequestResponse"
+        "401":
+          description: Email or password is incorrect.
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/UnauthorizedResponse"
+  "/api/v1/auth/register":
+    post:
+      tags:
+        - user
+      summary: Creates new user
+      description: "Adds a new user into the application"
+      operationId: userRegister
+      consumes:
+        - application/x-www-form-urlencoded
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: firstname
+          in: formData
+          description: firstname of user
+          required: true
+          type: string
+        - name: lastname
+          in: formData
+          description: lastname of user
+          required: true
+          type: string
+        - name: phone
+          in: formData
+          description: lastname of user
+          required: true
+          type: integer
+          format: int64
+        - name: email
+          in: formData
+          description: email of user
+          required: true
+          type: string
+        - name: password
+          in: formData
+          description: password of user
+          required: true
+          type: string
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessRegisterResponse"
+        "400":
+          description: Bad request, missing some details.
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/BadRequestResponse"
+        "409":
+          description: A user with this email already exists.
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/ConflictResponse"
+        "422":
+          description: Could not create user.
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/UnprocessableEntityResponse"
+  /api/v1/auth/users:
+    get:
+      tags:
+        - user
+      summary: Get all users
+      description: Get all the registered users
+      operationId: fetchUser
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessFetchUserResponse"
+  /api/v1/stocks/company-profile:
+    get:
+      tags:
+        - stock
+      summary: Get stock company profile
+      description: Get stock company profile
+      operationId: fetchCompanyProfile
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/market-news:
+    get:
+      tags:
+        - stock
+      summary: Get stock market news
+      description: Get all stock market news
+      operationId: fetchMarketNews
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/company-news:
+    get:
+      tags:
+        - stock
+      summary: Get stock company news
+      description: Get all stock company news
+      operationId: fetchCompanyNews
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockReponse"
+  /api/v1/stocks/social-sentiment:
+    get:
+      tags:
+        - stock
+      summary: Get stock social sentiment
+      description: Get all stock social sentiment
+      operationId: fetchSocialSentiment
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/peers:
+    get:
+      tags:
+        - stock
+      summary: Get all peers
+      description: Get all the registered peers
+      operationId: fetchPeers
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/earning-surprises:
+    get:
+      tags:
+        - stock
+      summary: Get stock earning surprises
+      description: Get all stock earning surprises
+      operationId: fetchEarningSurprises
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/recommendation-trends:
+    get:
+      tags:
+        - stock
+      summary: Get all recommendation trends
+      description: Get all stock recommendation trends
+      operationId: fetchRecommendationTrends
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/stock-candle:
+    get:
+      tags:
+        - stock
+      summary: Get all stock candle
+      description: Get all stock candle
+      operationId: fetchStockCandle
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/earning-calendar:
+    get:
+      tags:
+        - stock
+      summary: Get stock earning calendar
+      description: Get all stock earning calendar
+      operationId: fetchEarningCalendar
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/stocks/quote:
+    get:
+      tags:
+        - stock
+      summary: Get all quote
+      description: Get all stock quote
+      operationId: fetchQuote
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+definitions:
+  User:
+    title: User
+    example:
+      id: 14
+      firstname: mike
+      lastname: brown
+      email: mikebrown@email.com
+      phone: 18001119988
+      role: not assigned
+    properties:
+      id:
+        type: integer
+        format: int64
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      role:
+        type: string
+        description: User's Role
+        enum:
+          - admin
+          - investor
+          - not assigned
+    required:
+      - id
+      - firstname
+      - lastname
+      - email
+      - phone
+      - password
+    xml:
+      name: User
+  SuccessRegisterResponse:
+    title: SuccessRegisterResponse
+    example:
+      status: 201
+      data:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzNzc3LCJleHAiOjE1NTg0NzUzNzd9.t8VZ-fJygbxNhrF3ADXlu4007n9WPP6ZEWlbjl96oS8
+        user:
+          id: 14
+          firstname: fola
+          lastname: fola
+          email: fola@email.com
+          phone: 18001119988
+          role: not assigned
+        message: User registration successful
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      data:
+        $ref: '#/definitions/RegisterData'
+    required:
+    - status
+    - data
+  RegisterData:
+    title: RegisterData
+    example:
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzNzc3LCJleHAiOjE1NTg0NzUzNzd9.t8VZ-fJygbxNhrF3ADXlu4007n9WPP6ZEWlbjl96oS8
+      user:
+        id: 14
+        firstname: fola
+        lastname: fola
+        email: fola@email.com
+        phone: 18001119988
+        role: not assigned
+      message: User registration successful
+    type: object
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      message:
+        type: string
+    required:
+    - token
+    - user
+    - message
+  SuccessLoginResponse:
+    title: SuccessLoginResponse
+    example:
+      status: 200
+      data:
+        token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzODc3LCJleHAiOjE1NTg0NzU0Nzd9.UHOEGRia69KZNS4G09UpYCTAiitw3hjYxDqPjVwZjEs
+        user:
+          id: 14
+          firstname: fola
+          lastname: fola
+          email: fola@email.com
+          phone: 18001119988
+          role: not assigned
+        message: User log in successful
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      data:
+        $ref: '#/definitions/LoginData'
+    required:
+    - status
+    - data
+  LoginData:
+    title: LoginData
+    example:
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzNzc3LCJleHAiOjE1NTg0NzUzNzd9.t8VZ-fJygbxNhrF3ADXlu4007n9WPP6ZEWlbjl96oS8
+      user:
+        id: 14
+        firstname: fola
+        lastname: fola
+        email: fola@email.com
+        phone: 18001119988
+        role: not assigned
+      message: User log in successful
+    type: object
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      message:
+        type: string
+    required:
+    - token
+    - user
+    - message
+  SuccessFetchUserResponse:
+    title: SuccessFetchUserResponse
+    example:
+      status: 200
+      data:
+        id: 14
+        firstname: mike
+        lastname: brown
+        email: mikebrown@email.com
+        phone: 18001119988
+        status: verified
+        registered: 2019-05-21T00:00:00Z
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      data:
+        $ref: '#/definitions/FetchUserData'
+    required:
+    - status
+    - data
+  FetchUserData:
+    title: FetchUserData
+    example:
+      message: Users fetched successfully
+      count: 109
+      users:
+        $ref: '#/definitions/Users'
+    type: object
+    properties:
+      message:
+        type: string
+      count:
+        type: integer
+      users:
+        type: array
+        $ref: '#/definitions/Users'
+    required:
+    - message
+    - count
+    - users
+  Users:
+    title: Users
+    properties:
+      users:
+        type: array
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            firstName:
+              type: string
+            lastName:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
+            phone:
+              type: string
+            role:
+              type: string
+              description: User's Role
+              enum:
+                - admin
+                - investor
+                - not assigned
+    required:
+      - users
+    xml:
+      name: Users
+  BadRequestResponse:
+    title: BadRequestResponse
+    example:
+      status: 400
+      error: Bad request, missing some details.
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      error:
+        type: string
+    required:
+    - status
+    - error
+  ConflictResponse:
+    title: ConflictResponse
+    example:
+      status: 409
+      error: A user with this email already exists.
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      error:
+        type: string
+    required:
+    - status
+    - error
+  UnprocessableEntityResponse:
+    title: UnprocessableEntityResponse
+    example:
+      status: 422
+      error: Could not create user.
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      error:
+        type: string
+    required:
+    - status
+    - error
+  UnauthorizedResponse:
+    title: UnauthorizedResponse
+    example:
+      status: 401
+      error: Could not create user.
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      error:
+        type: string
+    required:
+    - status
+    - error
+  SuccessStockResponse:
+    title: SuccessStockResponse
+    example:
+      status: 200
+      data:
+        id: 11
+        firstname: mike
+        lastname: brown
+        email: mikebrown@email.com
+        amount: 100000
+        tenor: 6
+        status: pending
+        paymentinstallment: 17156.139999999999
+        balance: 102936.84
+        interest: 2936.8400000000001
+        createdon: 2019-05-21T00:00:00Z
+    type: object
+    properties:
+      status:
+        type: integer
+        format: int32
+      data:
+        $ref: '#/definitions/StockData'
+    required:
+    - status
+    - data
+  StockData:
+    title: StockData
+    example:
+      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzNzc3LCJleHAiOjE1NTg0NzUzNzd9.t8VZ-fJygbxNhrF3ADXlu4007n9WPP6ZEWlbjl96oS8
+      user:
+        id: 14
+        firstname: fola
+        lastname: fola
+        email: fola@email.com
+        phone: 18001119988
+        role: not assigned
+      message: User log in successful
+    type: object
+    properties:
+      token:
+        type: string
+      user:
+        $ref: '#/definitions/User'
+      message:
+        type: string
+    required:
+    - token
+    - user
+    - message
