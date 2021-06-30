@@ -1,5 +1,6 @@
 // import required constants
-const express = require("express")
+const express = require("express");
+const { authenticateUser } = require("../middleware/auth");
 const finnhub = require("../services/finnhub"), // auth controller
       router = express.Router(); // enable router;
 
@@ -37,7 +38,7 @@ const { successRes } = require('../utils/responseHandler');
  *             example: 
  * 
 */
-router.get("/", (req, res) => successRes(res, 200, { message: 'This is stock routes'}));
+router.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to the Stocka API v1.0! This is stock routes'}));
 
 /**
 *  @swagger
@@ -288,15 +289,15 @@ router.get("/earning-calendar", finnhub.getEarningsCalendar);
 *             application/json:
 *               schema:
 *                 $ref: ''
- *               properties:
- *                 status:
- *                   type: string
- *                   description: Response status
- *                 token:
- *                   type: string
- *                   description: JWT client token
- *             example: 
- *               
+*               properties:
+*                 status:
+*                   type: string
+*                   description: Response status
+*                 token:
+*                   type: string
+*                   description: JWT client token
+*             example: 
+*               
 */
 router.get("/quote", finnhub.getQuote);
 

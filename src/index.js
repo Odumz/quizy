@@ -5,6 +5,7 @@ const express = require("express"),
       app = express(),
       morgan = require('morgan');
 
+const YAML = require('yamljs')
 const { errorRes, successRes } = require('./utils/responseHandler');
       
 // enable swagger for documentation
@@ -14,34 +15,15 @@ const swaggerJsDoc = require('swagger-jsdoc')
 // log requests to the console with morgan
 app.use(morgan("dev"))
 
-// define swagger options
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Stocka API',
-      version: '1.0.0',
-      description: 'This is an inventory digital solution that will take account of trader\'s sales and stocks, calculates their profits or losses over a specific period of time and offer suggestions to build profits',
-    },
-    servers: [
-      {
-        url: 'http://localhost:5002/api/v1'
-      },
-      {
-        url: 'https://stocka-demo.herokuapp.com/api/v1'
-      }
-    ]
-  },
-  apis: [`${__dirname}/routes/*.js`], // files containing annotations as above
-};
+// define swagger document
+const swaggerDoc = YAML.load(`${process.cwd()}/swagger.yaml`);
 
-const specs = swaggerJsDoc(swaggerOptions);
-
-// swagger doc
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs, { explorer: true }))
+// use swagger doc
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc, { explorer: true }))
 
 // const upload = require('./utils/multer');
 // const { cloudinary } = require('./utils/cloudinary')
+
 // stock api
 const finnhub = require('./services/finnhub')
 
