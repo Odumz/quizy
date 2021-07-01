@@ -17,7 +17,9 @@ api_key.api_key = FINNHUB_API
 
 class stockAPI {
     static async webhooks (req, res) {
-        await axios.post('https://finnhub.io/api/v1/webhook/add?token=c36tleqad3ib6g7eequg', {'event': 'earnings', 'symbol': 'AAPL'})
+        const query = 'webhook/add?token='  
+        const url = FINNHUB_BASE_URL.concat(query).concat(FINNHUB_API)
+        await axios.post(url, {'event': 'earnings', 'symbol': 'AAPL'})
         .then((response) => {
             // console.log("webhook", response.data)
             const webhook  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
@@ -31,7 +33,9 @@ class stockAPI {
     }
 
     static async listWebhooks (req, res) {
-        await axios.get('https://finnhub.io/api/v1/webhook/list?token=c36tleqad3ib6g7eequg', {'event': 'earnings', 'symbol': 'AAPL'})
+        const query = 'webhook/list?token=' 
+        const url = FINNHUB_BASE_URL.concat(query).concat(FINNHUB_API)
+        await axios.get(url, {'event': 'earnings', 'symbol': 'AAPL'})
         .then((response) => {
             // console.log("list webhook", response.data)
             const listWebhook  = !lodash.isEmpty(response.data) ? (successRes(res, 200, response.data)) : (errorRes(next, 500, 'Whoops! Call Houston.'))
