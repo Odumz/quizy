@@ -692,24 +692,16 @@ definitions:
   StockData:
     title: StockData
     example:
-      token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJlbWFpbCI6Im1pa2Vicm93bkBlbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTU4NDUzNzc3LCJleHAiOjE1NTg0NzUzNzd9.t8VZ-fJygbxNhrF3ADXlu4007n9WPP6ZEWlbjl96oS8
-      user:
-        id: 14
-        firstname: fola
-        lastname: fola
-        email: fola@email.com
-        phone: 18001119988
-        role: not assigned
-      message: User log in successful
+      status: 200
+      data:
+        some: data
+        key: pair
     type: object
     properties:
-      token:
-        type: string
-      user:
-        $ref: '#/definitions/User'
-      message:
-        type: string
+      status:
+        type: integer
+      data:
+        type: object
     required:
-    - token
-    - user
-    - message
+    - status
+    - data
