@@ -1,73 +1,73 @@
-    const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-    // create profile schema & model
-    const Schema = mongoose.Schema;
+// create profile schema & model
+const Schema = mongoose.Schema;
 
-    const UserSchema = new Schema({
-        firstname: {
-            type: String,
-            trim: true,
-            required: true
-        },
-        lastname: {
-            type: String,
-            trim: true,
-            required: true
-        },
-        phone: {
-            type: Number,
-            trim: true,
-            required: true,
-        },
-        email: {
-            type: String,
-            unique: true,
-            trim: true,
-            required: true
-        },
-        password: {
-            type: String,
-            minlength: 8
-        },
-        role: {
-            type: String,
-            enum: ["admin", "investor", "not assigned"],
-            default: "not assigned"
-        },
-        isInvestor: {
-            type: Boolean,
-            default: 0,
-        },
-        isAdmin: {
-            type: Boolean,
-            default: 0
-        },
-        isVerified: {
-            type: Boolean,
-            default: 0
-        },
-        profileImage: {
-            type: String,
-            minLength: 14
-        },
-        account: {
-            type: Schema.Types.ObjectId,
-            ref: "useraccount"
-        },
-        isPushNotificationActive: {
-            type: Boolean,
-            default: 0,
-        },
-        isSubscribed: {
-            type: Boolean,
-            default: 0,
-        },
+const UserSchema = new Schema({
+    firstname: {
+        type: String,
+        trim: true,
+        required: true
     },
-    {
-        timestamps: true
-    }
-    );
+    lastname: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    phone: {
+        type: Number,
+        trim: true,
+        required: true,
+    },
+    email: {
+        type: String,
+        unique: true,
+        trim: true,
+        required: true
+    },
+    password: {
+        type: String,
+        minlength: 8
+    },
+    role: {
+        type: String,
+        enum: ["admin", "investor", "not assigned"],
+        default: "not assigned"
+    },
+    isInvestor: {
+        type: Boolean,
+        default: 0,
+    },
+    isAdmin: {
+        type: Boolean,
+        default: 0
+    },
+    isVerified: {
+        type: Boolean,
+        default: 0
+    },
+    profileImage: {
+        type: String,
+        minLength: 14
+    },
+    account: {
+        type: Schema.Types.ObjectId,
+        ref: "useraccount"
+    },
+    isPushNotificationActive: {
+        type: Boolean,
+        default: 0,
+    },
+    isSubscribed: {
+        type: Boolean,
+        default: 0,
+    },
+},
+{
+    timestamps: true
+}
+);
 
-    const User = mongoose.model('authyuser', UserSchema);
+const User = mongoose.model('authyuser', UserSchema);
 
-    module.exports = User;
+module.exports = User;
