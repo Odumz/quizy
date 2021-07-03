@@ -108,7 +108,53 @@ class authController {
 
   static async fetchUser (req, res) {
     try {
-      const users = await User.find();
+
+      let conditions = {};
+        
+      if (req.query.firstname) {
+          conditions.firstname = req.query.firstname
+      }
+
+      if (req.query.lastname) {
+          conditions.lastname = req.query.lastname
+      }
+
+      if (req.query.email) {
+          conditions.email = req.query.email
+      }
+
+      if (req.query.phone) {
+          conditions.phone = req.query.phone
+      }
+
+      if (req.query.role) {
+          conditions.role = req.query.role
+      }
+
+      if (req.query.profileImage) {
+        conditions.profileImage = req.query.profileImage
+    }
+
+      const users = await User.find(conditions).select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage');
+      // console.log(users)
+      successRes(res, 200, {
+        message: "Users fetched successfully",
+        count: users.length,
+        users
+      });  
+    } catch (err) {
+        res.status(400).json({ 
+            status: "failed", 
+            error: {
+              message: `${err.message}`
+            } 
+          });
+    }
+  };
+
+  static async fetchUserById (req, res) {
+    try {
+      const users = await User.find({_id: req.params.id}).select('_id firstname lastname email phone role isAdmin isBusinessOwner profile');
       // console.log(users)
       successRes(res, 200, {
         message: "Users fetched successfully",

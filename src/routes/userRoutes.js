@@ -116,6 +116,39 @@ router.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to the St
  router.get("/users",  authController.fetchUser);
 
 
+/**
+ * @swagger
+ *   auth/users:
+ *     get:
+ *       summary: Fetch all users.
+ *       tags: [Authentication]
+ *       requestBody:
+ *         required: true
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/User"
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: string
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   decription: Response status
+ *                 token:
+ *                   type: string
+ *                   description: JWT client token
+ *             example: 
+ *               status: success
+ *               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwY2UzNjQ2MzdlMTJhM2JiYzZjOGZmYiIsImlhdCI6MTYyNDIxNDg1NywiZXhwIjoxNjMxOTkwODU3fQ.-wqN0WBEoyTEwMu7HUJxvXGcYWuknKvo-FcccBsJy6k   
+ */
+
+ router.get("/users/:id",  authController.fetchUserById);
+
 
 /**
 *  @swagger

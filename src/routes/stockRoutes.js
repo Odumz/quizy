@@ -301,4 +301,56 @@ router.get("/earning-calendar", finnhub.getEarningsCalendar);
 */
 router.get("/quote", finnhub.getQuote);
 
+/**
+*  @swagger
+*  paths:
+*   /stocks/earning-calendar:
+*     get:
+*       summary: get earnings calendar
+*       tags: [Stock]
+*       responses:
+*         "200":
+*           description: get earnings calendar
+*           content:
+*             application/json:
+*               schema:
+*                 $ref: ''
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   description: Response status
+ *                 token:
+ *                   type: string
+ *                   description: JWT client token
+ *             example: 
+ *               
+*/
+router.get("/stock-symbol", finnhub.getStockSymbol);
+
+/**
+*  @swagger
+*  paths:
+*   /stocks/quote:
+*     get:
+*       summary: get quote
+*       tags: [Stock]
+*       responses:
+*         "200":
+*           description: get quote
+*           content:
+*             application/json:
+*               schema:
+*                 $ref: ''
+*               properties:
+*                 status:
+*                   type: string
+*                   description: Response status
+*                 token:
+*                   type: string
+*                   description: JWT client token
+*             example: 
+*               
+*/
+router.get("/basic-financials", finnhub.getBasicFinancials);
+
 module.exports = router;

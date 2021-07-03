@@ -42,6 +42,19 @@ const UserSchema = new Schema({
         type: Boolean,
         default: 0
     },
+    isVerified: {
+        type: Boolean,
+        default: 0
+    },
+    profileImage: {
+        type: String,
+        minLength: 14
+    },
+    account: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "useraccount"
+    },
 },
 {
     timestamps: true
