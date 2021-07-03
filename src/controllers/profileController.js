@@ -34,7 +34,7 @@ class profileController {
             new: true
           }).then(user => {
             User.findOne({_id: req.params.id})
-            .select('_id firstname lastname email phone role profileImage isAdmin isBusinessOwner')
+            .select('_id firstname lastname email phone role profileImage isAdmin isBusinessOwner isSubscribed isPushNotificationActive')
             .then(user => {
                 if (!user) {
                     return res.status(404).json({
@@ -56,7 +56,7 @@ class profileController {
     static async editUserInfo(req, res, next) {
         await User.findOneAndUpdate({_id: req.params.id}, req.body).then(user => {
             User.findOne({_id: req.params.id})
-            .select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage')
+            .select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage isSubscribed isPushNotificationActive')
             .then(user => {
                 if (!user) {
                     return res.status(404).json({
@@ -78,7 +78,7 @@ class profileController {
     static async removeProfileImage(req, res, next) {
         await User.findOneAndUpdate({_id: req.params.id}, req.body).then(user => {
             User.findOne({_id: req.params.id})
-            .select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage')
+            .select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage isSubscribed isPushNotificationActive')
             .then(user => {
                 if (!user) {
                     return res.status(404).json({

@@ -31,10 +31,10 @@ const UserSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ["admin", "businessowner", "not assigned"],
+        enum: ["admin", "investor", "not assigned"],
         default: "not assigned"
     },
-    isBusinessOwner: {
+    isInvestor: {
         type: Boolean,
         default: 0,
     },
@@ -53,6 +53,14 @@ const UserSchema = new Schema({
     account: {
         type: Schema.Types.ObjectId,
         ref: "useraccount"
+    },
+    isPushNotificationActive: {
+        type: Boolean,
+        default: 0,
+    },
+    isSubscribed: {
+        type: Boolean,
+        default: 0,
     },
 },
 {
