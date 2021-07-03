@@ -52,7 +52,6 @@ const UserSchema = new Schema({
     },
     account: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "useraccount"
     },
 },
