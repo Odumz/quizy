@@ -135,7 +135,7 @@ class authController {
         conditions.profileImage = req.query.profileImage
     }
 
-      const users = await User.find(conditions).select('_id firstname lastname email phone role isAdmin isBusinessOwner profileImage');
+      const users = await User.find(conditions).select('_id firstname lastname email phone role profileImage isAdmin isBusinessOwner isSubscribed isPushNotificationActive');
       // console.log(users)
       successRes(res, 200, {
         message: "Users fetched successfully",
@@ -154,7 +154,7 @@ class authController {
 
   static async fetchUserById (req, res) {
     try {
-      const users = await User.find({_id: req.params.id}).select('_id firstname lastname email phone role isAdmin isBusinessOwner profile');
+      const users = await User.find({_id: req.params.id}).select('_id firstname lastname email phone role profileImage isAdmin isBusinessOwner isSubscribed isPushNotificationActive');
       // console.log(users)
       successRes(res, 200, {
         message: "Users fetched successfully",

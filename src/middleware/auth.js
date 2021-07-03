@@ -37,11 +37,11 @@ class Auth {
         return next()
     }
 
-    static async isBusinessOwner (req, res, next) {
+    static async isInvestor (req, res, next) {
         // console.log(req.user);
         let userRole = req.user.role;
         // console.log(userRole);
-        if (req.user.role !== "businessowner") {
+        if (req.user.role !== "investor") {
             if (req.user.role !== "admin") {
                 return errorRes(next, 401, 'you are not allowed on this route');
             }
