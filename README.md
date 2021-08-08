@@ -18,7 +18,7 @@ This is an application that allows you take tests and get your results and corre
    * [Quizy API](#)
    * [Quizy API - Demo](#)
    * [Quizy API - Documentation](#)
-   * [Quizy API - Postman docs](#)
+   * [Quizy API - Postman docs](https://www.getpostman.com/collections/a098f86dc809344794a7)
 
 
 
