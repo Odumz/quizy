@@ -79,6 +79,11 @@ class questionController {
     // add a question
     static async add(req, res, next) {
         const {description, option} = req.body;
+        if (!description || !option) {
+            return res.status(400).json({
+                message: 'Error! Question not added'
+            });
+        }
         await Question.create({
             description,
             option,
