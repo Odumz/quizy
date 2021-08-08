@@ -25,7 +25,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc, { explorer: tr
 // const { cloudinary } = require('./utils/cloudinary')
 
 // stock api
-const finnhub = require('./services/finnhub')
+// const finnhub = require('./services/finnhub')
 
 // import routes
 const routes = require("./routes");
@@ -50,7 +50,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: false })); // handle form 
 app.use("/api/v1", routes);
 
 // simple route
-app.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to Stocka application with nodejs and mongodb.'}));
+app.get("/", (req, res) => successRes(res, 200, { message: 'Welcome to Quizy application with nodejs and mongodb.'}));
 
 app.all('*', (req, res, next) => errorRes(next, 404, 'The Route you are requesting for does not exist'));
 

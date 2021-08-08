@@ -9,9 +9,9 @@ const QuestionSchema = new Schema({
         trim: true,
         required: true
     },
-    alternatives: [
+    option: [
         {
-            options: {
+            answer: {
                 type: String,
                 trim: true,
                 required: true
