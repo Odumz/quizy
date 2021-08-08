@@ -6,14 +6,13 @@
 
 // constants
 const express = require('express');
-const profileController = require('../controllers/profileController');
-const upload = require('../utils/multer')
-const { authenticateUser } = require('../middleware/auth')
+const questionController = require('../controllers/questionController');
+// const { authenticateUser } = require('../middleware/auth')
 const router = express.Router();
 
 router.get('/test', (req, res) => {
   res.status(200).json({
-    message: 'Welcome to the Stocka API v1.0! This is user profile route',
+    message: 'Welcome to the Quizy API v1.0! This is question route',
   });
 });
 
@@ -26,7 +25,7 @@ router.get('/test', (req, res) => {
  *      '200':
  *        description: OK
  */
-//  router.get('/', profileController.getAll); 
+ router.get('/', questionController.getAll); 
 
 
 /**
@@ -37,7 +36,7 @@ router.get('/test', (req, res) => {
  *      '200':
  *        description: OK
  */
-//  router.get('/:id', profileController.get); 
+ router.get('/:id', questionController.get); 
 
 /**
  * /api/v1/create:
@@ -47,7 +46,7 @@ router.get('/test', (req, res) => {
  *      '200':
  *        description: OK
  */
-router.put('/image/upload/:id',  upload.single('profileImage'), profileController.uploadImage); 
+// router.put('/image/upload/:id',  upload.single('profileImage'), profileController.uploadImage); 
 
 
 /**
@@ -58,7 +57,7 @@ router.put('/image/upload/:id',  upload.single('profileImage'), profileControlle
  *      '200':
  *        description: OK
  */
- router.put('/edit/:id', profileController.editUserInfo);
+ router.put('/:id', questionController.edit);
 
 
 /**
@@ -69,7 +68,7 @@ router.put('/image/upload/:id',  upload.single('profileImage'), profileControlle
  *      '200':
  *        description: OK
  */
-// router.delete('/delete/:id', profileController.delete);
+router.delete('/:id', questionController.delete);
 
 
 /**
@@ -80,6 +79,6 @@ router.put('/image/upload/:id',  upload.single('profileImage'), profileControlle
  *      '200':
  *        description: OK
  */
- router.put('/image/delete/:id', profileController.removeProfileImage);
+ router.post('/', questionController.add);
 
 module.exports = router;

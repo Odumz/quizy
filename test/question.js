@@ -12,102 +12,55 @@ beforeEach(() => {
     request = chai.request(app);
 });
 
-describe('POST auth/register', () => {
-    it('SHOULD NOT register the user if firstname is omitted', async () => {
-        const newUser = {
-            lastname: 'ewale',
-            email: 'ewaleorio@stocka.com',
-            phone: 4567389485,
-            password: '1lov3d0gz'
+describe('POST accounts/add', () => {
+    it('SHOULD NOT add the account if userId is omitted', async () => {
+        const newAccount = {
+            bankname: 'gtb',
+            accountnumber: 4567389485
         };
-        const res = await request.post('/api/v1/auth/register').send(newUser);
+        const res = await request.post('/api/v1/accounts/add').send(newAccount);
         res.should.have.status(400);
         res.body.should.have.property('error');
         res.body.should.have.property('status').eql(400);
     });
-    it('SHOULD NOT register the user if lastname is omitted', async () => {
-      const newUser = {
-        firstname: 'michael',
-        email: 'mikewagner@stocka.com',
-        phone: 18007593000,
-        password: 'Ilove0cats#',
+    it('SHOULD NOT add the account if bankname is omitted', async () => {
+      const newAccount = {
+        userId: 14,
+        accountnumber: 18007593000
       };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
+      const res = await request.post('/api/v1/accounts/add').send(newAccount);
       res.should.have.status(400);
       res.body.should.have.property('error');
       res.body.should.have.property('status').eql(400);
     });
-    it('SHOULD NOT register the user if email is omitted', async () => {
-      const newUser = {
-        firstname: 'michael',
-        lastname: 'wagner',
-        phone: 18007593000,
-        password: 'Ilove0cats#',
+    it('SHOULD NOT add the account if account number is omitted', async () => {
+      const newAccount = {
+        bankname: 'wagner',
+        userId: 18007593000
       };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
+      const res = await request.post('/api/v1/accounts/add').send(newAccount);
       res.should.have.status(400);
       res.body.should.have.property('error');
       res.body.should.have.property('status').eql(400);
     });
-    it('SHOULD NOT register the user if phone number is omitted', async () => {
-      const newUser = {
-        firstname: 'michael',
-        lastname: 'wagner',
-        email: 'mikewagner@stocka.com',
-        password: 'Ilove0cats#',
+    it('SHOULD NOT register the account if account number is less than 10 characters', async () => {
+      const newAccount = {
+        bankname: 'michael',
+        userId: 18007593000,
+        accountnumber: 18007
       };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
+      const res = await request.post('/api/v1/accounts/add').send(newAccount);
       res.should.have.status(400);
       res.body.should.have.property('error');
       res.body.should.have.property('status').eql(400);
     });
-    it('SHOULD NOT register the user if password is omitted', async () => {
-      const newUser = {
-        firstname: 'michael',
-        lastname: 'wagner',
-        email: 'mikewagner@stocka.com',
-        phone: 18007593000,
+    it('SHOULD register the account if details are complete', async () => {
+      const newAccount = {
+        bankname: 'michael',
+        userId: 18007593000,
+        accountnumber: 1800700986
       };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
-      res.should.have.status(400);
-      res.body.should.have.property('error');
-      res.body.should.have.property('status').eql(400);
-    });
-    // it('SHOULD NOT register the user if address is omitted', async () => {
-    //   const newUser = {
-    //     firstname: 'michael',
-    //     lastname: 'wagner',
-    //     password: 'six',
-    //     email: 'mikewagner@stocka.com',
-    //     phone: 18007593000,
-    //   };
-    //   const res = await request.post('/api/v1/auth/register').send(newUser);
-    //   res.should.have.status(400);
-    //   res.body.should.have.property('error');
-    //   res.body.should.have.property('status').eql(400);
-    // });
-    it('SHOULD NOT register the user if password is less than 8 characters', async () => {
-      const newUser = {
-        firstname: 'michael',
-        lastname: 'wagner',
-        password: 'six',
-        email: 'mikewagner@stocka.com',
-        phone: 18007593000
-      };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
-      res.should.have.status(400);
-      res.body.should.have.property('error');
-      res.body.should.have.property('status').eql(400);
-    });
-    it('SHOULD register the user if user doesn\'t exist', async () => {
-      const newUser = {
-        firstname: 'Tom',
-        lastname: 'huddlestone',
-        email: 'losa@caela.com',
-        phone: 19002000800,
-        password: 'Ilove0dogs#'
-      };
-      const res = await request.post('/api/v1/auth/register').send(newUser);
+      const res = await request.post('/api/v1/accounts/add').send(newAccount);
       res.should.have.status(201);
       res.body.should.have.property('status').eql(201);
       // res.body.should.be.a('object');

@@ -1,27 +1,24 @@
-# Stocka-be-pjt-102
-Backend for Stocka project
+# Quizy-API
+Backend for Quizy project
 
 ## Project Description
-This is an an inventory digital solution that will take account of trader's sales and stocks, calculates their profits or losses over a specific period of time and offer suggestions to build profits.
-Some of the wow features of Stocka will include a long term graphical analysis to predict future gains, goods scanner for ease 
-at point of purchase, and daily profit and loss results.
-s
+This is an application that allows you take tests and get your results and corrections to wrong answers given
 
-   Design Link
+   <!-- Design Link
    * [Lo-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=0%3A1)
    * [Hi-fi link](https://www.figma.com/file/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=8%3A0)
-   * [User-flow and prototype link](https://www.figma.com/proto/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=1349%3A355&scaling=scale-down&page-id=535%3A0)
+   * [User-flow and prototype link](https://www.figma.com/proto/aD1DdXvw6wavwHjo5MNN9m/STOCKA?node-id=1349%3A355&scaling=scale-down&page-id=535%3A0) -->
 
 
    Frontend development link
-   * [Stocka frontend](https://stocka-frontend.netlify.app/)
+   * [Quizy frontend](#)
 
 
    Backend development link
-   * [Stocka API](#)
-   * [Stocka API - Demo](https://stocka-demo.herokuapp.com/)
-   * [Stocka API - Documentation](https://stocka-demo.herokuapp.com/api-docs)
-   * [Stocka API - Postman docs](https://www.getpostman.com/collections/75b079c2c14ac7fac3f3)
+   * [Quizy API](#)
+   * [Quizy API - Demo](#)
+   * [Quizy API - Documentation](#)
+   * [Quizy API - Postman docs](#)
 
 
 
@@ -62,7 +59,7 @@ The folder is structured like below
    npm run start
    ```
 
-## Contribution guide
+<!-- ## Contribution guide
    * [Contribution Guide](https://docs.google.com/document/d/1OTOpJ52unFRNgOP9uw-EZO7uZayeLFbditGahLxvD4c/edit?usp=sharing)
 
 ```sh
@@ -74,14 +71,14 @@ The folder is structured like below
    - devs should push to branch develop and create a pull request when done
    - code should be hosted on heroku
    - hosted link should be added as a comment on issues
-```
+``` -->
 
 ## Routes and Usage
 ### Environments
-<p>Local URL: http://localhost:5002</p>
+<p>Local URL: http://localhost:5003</p>
 <p></p>Production URL: </p>
 
-### Test Routes
+<!-- ### Test Routes
 ```
  {URL}:
   get:
@@ -173,4 +170,4 @@ Delete route
          message: {String: 'Stock item deleted successfully'},
          image: {String: 'item no longer exists'}
       }
-```
+``` -->

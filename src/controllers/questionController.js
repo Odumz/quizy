@@ -5,7 +5,7 @@
  */
 
 // import models
-const Account = require('../models/UserAccount');
+const Question = require('../models/question');
 
 // Load method categories.
 const lodash = require('lodash');
@@ -31,7 +31,7 @@ class accountController {
         // console.log(conditions)
         // console.log(req.query)
         
-        await Account.find(conditions)
+        await Question.find(conditions)
         .select('_id bankname accountnumber')
         .exec()
         .then(accounts => {
@@ -59,7 +59,7 @@ class accountController {
 
     // get an account
     static async get(req, res, next) {
-        await Account.findOne({_id: req.params.id})
+        await Question.findOne({_id: req.params.id})
             .select('_id bankname accountnumber')
             .then(account => {
                 if (!account) {
@@ -79,7 +79,7 @@ class accountController {
     // add an account
     static async add(req, res, next) {
         const {bankname, accountnumber, userId} = req.body;
-        await Account.create({
+        await Question.create({
             bankname,
             accountnumber,
             userId
@@ -102,8 +102,8 @@ class accountController {
 
     // edit an account
     static async edit(req, res, next) {
-        await Account.findOneAndUpdate({_id: req.params.id}, req.body).then(image => {
-            Account.findOne({_id: req.params.id})
+        await Question.findOneAndUpdate({_id: req.params.id}, req.body).then(image => {
+            Question.findOne({_id: req.params.id})
             .select('_id bankname accountnumber')
             .then(account => {
                 if (!account) {
@@ -124,7 +124,7 @@ class accountController {
 
     // delete an account
     static async delete(req, res, next) {
-        Account.findOneAndDelete({_id: req.params.id})
+        Question.findOneAndDelete({_id: req.params.id})
         .select('_id bankname accountnumber')
             .then(account => {
                 if (!account) {

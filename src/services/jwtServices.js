@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const { JWTSECRET, JWTEXPIRY } = process.env;
-const { errorRes, successRes } = require('../utils/responseHandler');
+const { errorRes } = require('../utils/responseHandler');
 
 // console.log('hid');
 

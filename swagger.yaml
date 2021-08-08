@@ -1,22 +1,23 @@
 swagger: "2.0"
 info:
-  description: "This is an API documentation for the STOCKA API server."
+  description: "This is an API documentation for the QUIZY API server."
   version: 1.0.0
-  title: Stocka API Documentation
+  title: Quizy API Documentation
   license:
     name: Apache 2.0
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: 
   - stocka-demo.herokuapp.com
 tags:
-  - name: stock
-    description: Operations about stocks
-  - name: user
-    description: Operations about users
   - name: test
     description: Operations on testing the application
+  - name: user
+    description: Operations on users
+  - name: account
+    description: Operations on user account
+  - name: stock
+    description: Operations on stocks
 schemes:
-  - http
   - https
 paths:
   /:
@@ -69,7 +70,7 @@ paths:
       tags:
         - test
       summary: Test stock API
-      description: Test the auth service connection
+      description: Test the stock service connection
       operationId: testStock
       consumes:
         - application/json
@@ -79,6 +80,36 @@ paths:
       responses:
         "200":
           description: Welcome to the Stocka API v1.0! This is stock routes
+  /api/v1/profile/test:
+    get:
+      tags:
+        - test
+      summary: Test profile API
+      description: Test the profile service connection
+      operationId: testProfile
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to the Stocka API v1.0! This is profile routes
+  /api/v1/accounts/test:
+    get:
+      tags:
+        - test
+      summary: Test accounts API
+      description: Test the account service connection
+      operationId: testAccount
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: Welcome to the Stocka API v1.0! This is account routes
   "/api/v1/auth/login":
     post:
       tags:
@@ -146,7 +177,7 @@ paths:
           type: string
         - name: phone
           in: formData
-          description: lastname of user
+          description: phone number of user
           required: true
           type: integer
           format: int64
@@ -394,6 +425,200 @@ paths:
             type: object
             items:
               $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/profile/image/upload/{id}:
+    put:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+        - name: profileImage
+          in: formData
+          description: profile image of user
+          required: true
+          type: string
+          format: binary
+      summary: Add profile image
+      description: Add a profile image for a user
+      operationId: addProfileImage
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/auth/users/{id}:
+    get:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      summary: get user by id
+      description: get a user's profile by id
+      operationId: getUserbyId
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/profile/edit/{id}:
+    put:
+      tags:
+        - user
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+        - name: firstname
+          in: formData
+          description: firstname of user
+          type: string
+        - name: lastname
+          in: formData
+          description: lastname of user
+          type: string
+        - name: phone
+          in: formData
+          description: phone number of user
+          type: integer
+          format: int64
+        - name: isVerified
+          in: formData
+          description: email verification of user
+          type: boolean
+        - name: isSubscribed
+          in: formData
+          description: newsletter subscription of user
+          type: boolean
+        - name: isPushNotificationActive
+          in: formData
+          description: push notification preferrence of user
+          type: boolean
+        - name: isAdmin
+          in: formData
+          description: is user an admin
+          type: boolean
+        - name: isInvestor
+          in: formData
+          description: is user an investor
+          type: boolean
+      summary: Edit user profile 
+      description: Edit user profile
+      operationId: editProfile
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/accounts:
+    get:
+      tags:
+        - account
+      summary: Get all accounts
+      description: Get all user bank accounts
+      operationId: getBankAccounts
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/accounts/{id}:
+    get:
+      tags:
+        - account
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to get
+      summary: Get a bank account
+      description: Get a user bank account
+      operationId: getBankAccountById
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
+  /api/v1/accounts/add:
+    post:
+      tags:
+        - account
+      parameters:
+        - name: bankname
+          in: formData
+          description: bank name of user
+          type: string
+        - name: userId
+          in: formData
+          description: id of user
+          type: string
+        - name: accountnumber
+          in: formData
+          description: account number of user
+          type: integer
+          format: int64
+      summary: Add a bank account
+      description: Add a user bank account
+      operationId: addBankAccountById
+      consumes:
+        - application/json
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      responses:
+        "201":
+          description: successful operation
+          schema:
+            type: object
+            items:
+              $ref: "#/definitions/SuccessStockResponse"
 definitions:
   User:
     title: User
@@ -404,6 +629,13 @@ definitions:
       email: mikebrown@email.com
       phone: 18001119988
       role: not assigned
+      isVerified: false
+      isInvestor: false
+      isSubscribed: false
+      isPushNotificationActive: false
+      isAdmin: false
+      profileImage: alongurl.com
+      account: 60d4e9020adaaa0004dc2ae5
     properties:
       id:
         type: integer
@@ -417,7 +649,7 @@ definitions:
       password:
         type: string
       phone:
-        type: string
+        type: integer
       role:
         type: string
         description: User's Role
@@ -425,6 +657,18 @@ definitions:
           - admin
           - investor
           - not assigned
+      isVerified:
+        type: boolen
+      isInvestor:
+        type: boolean
+      isSubscribed:
+        type: boolean
+      isPushNotificationActive:
+        type: boolean
+      profileImage:
+        type: string
+      account:
+        type: integer
     required:
       - id
       - firstname
@@ -434,6 +678,31 @@ definitions:
       - password
     xml:
       name: User
+  Account:
+    title: Account
+    example:
+      id: 14
+      userId: 60d4e9020adaaa0004dc2ae5
+      bankname: guaranteed trust bank
+      accountnumber: 1201475986
+    properties:
+      id:
+        type: integer
+        format: int64
+      userId:
+        type: integer
+        format: int64
+      bankname:
+        type: string
+      accountnumber:
+        type: integer
+    required:
+      - id
+      - userId
+      - bankname
+      - accountnumber
+    xml:
+      name: Account
   SuccessRegisterResponse:
     title: SuccessRegisterResponse
     example:
