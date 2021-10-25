@@ -58,8 +58,6 @@ const port = process.env.PORT || PORT;
 
 // error handling middleware
 app.use((err,req,res,next) => {
-  //console.log(err);
-  // res.status(404).send({error: err.message});
   res.status(err.status >= 100 && err.status < 600 ? err.status : 500);
   res.send({
     status: err.status ? err.status : 500,
