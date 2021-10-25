@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node index.js",
-    "test": "mocha"
+    "test": "export NODE_ENV=test && nodemon --exec \" mocha \""
   },
   "repository": {
     "type": "git",
